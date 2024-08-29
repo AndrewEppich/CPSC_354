@@ -1,0 +1,118 @@
+\documentclass{article}
+
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[usenames]{color}
+\usepackage{hyperref}
+  \hypersetup{
+    colorlinks = true,
+    urlcolor = blue,       
+    linkcolor= blue,      
+    citecolor= blue,      
+    filecolor= blue,     
+    }
+    
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+\theoremstyle{plain} 
+   \newtheorem{theorem}{Theorem}[section]
+   \newtheorem{corollary}[theorem]{Corollary}
+   \newtheorem{lemma}[theorem]{Lemma}
+   \newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+   \newtheorem{definition}[theorem]{Definition}
+   \newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}    
+  \newtheorem{remark}[theorem]{Remark}
+
+\title{CPSC 354 Report}
+\author{Andrew Eppich  \\ Chapman University}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}\label{intro}
+
+\section{Homework 1}\label{homework1}
+
+\subsection{Question 5}
+
+\begin{lstlisting}
+rw [add_zero]
+rw [add_zero]
+rfl
+\end{lstlisting}
+
+\subsubsection{Proof Explanation}
+
+For this question, the Lean proof is related to the corresponding proof in mathematics because we know that we can use the additive identity property, which says that \(x + 0 = x\). By using this, we can simplify \(b + 0\) and \(c + 0\) easily to get \(a + b + c = a + b + c\), which we can determine is the same by the reflexivity property, which states that if \(a = b\), then \(a\) and \(b\) are identical. Therefore, \(a + b + c\) is identical to \(a + b + c\).
+
+\subsection{Question 6}
+
+\begin{lstlisting}
+rw [add_zero c]
+rw [add_zero b]
+rfl
+\end{lstlisting}
+
+
+\subsection{Question 7}
+
+\begin{lstlisting}
+rw [one_eq_succ_zero]
+rw [add_succ]
+rw [add_zero]
+rfl
+\end{lstlisting}
+
+
+\subsection{Question 8}
+
+\begin{lstlisting}
+rw [two_eq_succ_one]
+rw [one_eq_succ_zero]
+rw [add_succ]
+rw[add_succ]
+rw [add_zero]
+rw [four_eq_succ_three]
+rw [three_eq_succ_two]
+rw [two_eq_succ_one]
+rw [one_eq_succ_zero]
+rfl
+\end{lstlisting}
+
+
+\end{document}
