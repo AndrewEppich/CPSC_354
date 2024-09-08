@@ -114,8 +114,87 @@ rw [one_eq_succ_zero]
 rfl
 \end{lstlisting}
 
-/subsection{Discord Question}
+\subsection{Discord Question}
 
 I was wondering if the computers use of discrete math extends to all program computations or just math computations
+
+\section{Homework 2}\label{homework2}
+
+\subsection{Question 1}
+
+\begin{lstlisting}
+induction n with d hd
+rw [add_zero]
+rfl
+rw [add_succ]
+rw [hd]
+rfl
+\end{lstlisting}
+
+\subsection{Question 2}
+
+\begin{lstlisting}
+  induction b with d hd
+  rw [add_zero]
+  rw [add_zero]
+  rfl
+  rw [add_succ]
+  rw [add_succ]
+  rw [hd]
+  rfl
+\end{lstlisting}
+
+\subsection{Question 3}
+
+\begin{lstlisting}
+induction b with d hd
+rw [add_zero]
+rw [zero_add]
+rfl
+rw [add_succ]
+rw [hd]
+rw [succ_add]
+rfl
+\end{lstlisting}
+
+\subsection{Question 4}
+
+\begin{lstlisting}
+  induction a with d hd
+  rw [zero_add]
+  rw [zero_add]
+  rfl
+  rw [succ_add]
+  rw [succ_add]
+  rw [succ_add]
+  rw [hd]
+  rfl
+\end{lstlisting}
+
+\subsubsection{Explaination}
+
+The lean proof relates to the proof in mathematics because it uses induction to solve the problem. Then the Lean proof is solved by solving the equation of the successors. Just like in mathematics it uses simple rules to change the positioning of the parenthesis so each side is exactly the same. This is exactly like how the mathematical proof would be written.
+
+\subsection{Question 5}
+
+\begin{lstlisting}
+  induction a with d hd
+  rw [zero_add]
+  rw [zero_add]
+  rw [add_comm]
+  rfl
+  rw [add_comm]
+  rw [add_comm]
+  rw [succ_add]
+  rw [succ_add]
+  rw [succ_add]
+  rw [succ_add]
+  rw [hd]
+  rfl
+\end{lstlisting}
+
+\subsection{Discord Question}
+
+I was wondering how discrete math and the recursive algorithms we talked about fit into a programming language and how it actually works
 
 \end{document}
