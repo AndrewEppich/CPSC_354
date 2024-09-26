@@ -1,0 +1,22 @@
+?start: exp
+
+?exp: exp "+" exp1            -> plus
+    | exp "-" exp1            -> minus
+    | exp1
+
+?exp1: exp1 "*" exp2          -> times
+    | exp2
+
+?exp2: exp2 "^" exp3          -> power
+    | exp3
+
+?exp3: "-" exp4               -> neg
+    | "log" exp "base" exp    -> log
+    | exp4
+
+?exp4: NUMBER                 -> num
+    | "(" exp ")"             -> parens
+
+%import common.NUMBER
+%import common.WS
+%ignore WS

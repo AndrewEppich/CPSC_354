@@ -232,4 +232,71 @@ In my literature review with ChatGPT, I explored interpreted vs. compiled progra
 How complex do parsing algorithms get the farther down the level of programming languages you go?
 
 
+\section{Homework 5}\label{homework5}
+
+\subsection{Question 1}
+
+\begin{lstlisting}
+  exact todo_list
+\end{lstlisting}
+
+\subsection{Question 2}
+
+\begin{lstlisting}
+  exact and_intro p s
+\end{lstlisting}
+
+\subsection{Question 3}
+
+\begin{lstlisting}
+  exact ⟨⟨a,i⟩,⟨o,u⟩⟩
+\end{lstlisting}
+
+\subsection{Question 4}
+
+\begin{lstlisting}
+  have p := vm.left
+  exact p
+\end{lstlisting}
+
+\subsection{Question 5}
+
+\begin{lstlisting}
+  exact and_right h
+\end{lstlisting}
+
+\subsection{Question 6}
+
+\begin{lstlisting}
+  have a:= and_left h1
+  have b := and_right h2
+  exact ⟨a, b⟩
+\end{lstlisting}
+
+\subsection{Question 7}
+
+\begin{lstlisting}
+  have h1 := h.right
+  have h2 := h.left
+  have h3 := h2.right
+  exact h.left.right.left.left.right
+\end{lstlisting}
+
+\subsection{Question 8}
+
+\begin{lstlisting}
+  have h1 := and_left h
+  have h2 := and_right h
+  have h3 := and_right h2
+  have h4 := and_left h3
+  have h5 := and_left h4
+  have h6 := and_right h1
+  have h7 := and_left h1
+  have h8 := and_left h7
+  have h9 := and_right h7
+  exact ⟨h6, h5, h8, h9⟩
+\end{lstlisting}
+
+\subsection{Discord Question}
+
 \end{document}
