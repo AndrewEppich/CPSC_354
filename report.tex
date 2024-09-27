@@ -9,6 +9,10 @@
 \usepackage[usenames]{color}
 \usepackage{hyperref}
 \usepackage{graphicx}
+\usepackage{stmaryrd}
+\usepackage{float}
+
+
 
   \hypersetup{
     colorlinks = true,
@@ -215,16 +219,18 @@ In my literature review with ChatGPT, I explored interpreted vs. compiled progra
 
 \section{Homework 4}\label{homework4}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth, page=1]{CPSC_354_Homework_4.pdf}
-  \label{fig:sample_pdf}
+  \caption{Homework 4 - Page 1}
+  \label{fig:homework4_page1}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.7\textwidth, page=2]{CPSC_354_Homework_4.pdf}
-  \label{fig:sample_pdf}
+  \caption{Homework 4 - Page 2}
+  \label{fig:homework4_page2}
 \end{figure}
 
 \subsection{Discord Question}
@@ -249,7 +255,7 @@ How complex do parsing algorithms get the farther down the level of programming 
 \subsection{Question 3}
 
 \begin{lstlisting}
-  exact ⟨⟨a,i⟩,⟨o,u⟩⟩
+  exact \llangle a,i\rrangle, \llangle o,u\rrangle
 \end{lstlisting}
 
 \subsection{Question 4}
@@ -270,7 +276,7 @@ How complex do parsing algorithms get the farther down the level of programming 
 \begin{lstlisting}
   have a:= and_left h1
   have b := and_right h2
-  exact ⟨a, b⟩
+  exact \llangle a, b\rrangle
 \end{lstlisting}
 
 \subsection{Question 7}
@@ -294,13 +300,13 @@ How complex do parsing algorithms get the farther down the level of programming 
   have h7 := and_left h1
   have h8 := and_left h7
   have h9 := and_right h7
-  exact ⟨h6, h5, h8, h9⟩
+  exact \llangle h6, h5, h8, h9\rrangle
 \end{lstlisting}
 
 \subsubsection{Proof Explaination}
 I took the left and right sides and set them equal to different variables. Next I took those broken down parts and continued to break them down into different variables until I had a single value for a single variable. Then I added the desired variables together to acheive the desired equation
 
 \subsection{Discord Question}
-When thinking about the final Lean problem on the homework, I solved it by breaking up each term over and over again with and_left and and_right until there were single terms. It was like a tree forming a new branch and leaves every time the equation was broken up. My question is, how is the logic of AND and and_left and and_right used in programming languages and other applications? And is this just the logic that is used to parse a BST?
+When thinking about the final Lean problem on the homework, I solved it by breaking up each term over and over again with and\_left and and\_right until there were single terms. It was like a tree forming a new branch and leaves every time the equation was broken up. My question is, how is the logic of AND and and\_left and and\_right used in programming languages and other applications? And is this just the logic that is used to parse a BST?	
 
 \end{document}
