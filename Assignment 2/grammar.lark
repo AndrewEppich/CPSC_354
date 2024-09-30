@@ -10,7 +10,7 @@
 ?exp2: exp2 "^" exp3          -> power
     | exp3
 
-?exp3: "-" exp4               -> neg
+?exp3: "-" exp3               -> neg
     | "log" exp "base" exp    -> log
     | exp4
 
@@ -18,5 +18,5 @@
     | "(" exp ")"             -> parens
 
 %import common.NUMBER
-%import common.WS
-%ignore WS
+%import common.WS_INLINE
+%ignore WS_INLINE

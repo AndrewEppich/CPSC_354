@@ -9,7 +9,7 @@ with open('grammar.lark', 'r') as grammar_file:
 parser = Lark(grammar, parser='lalr')
 
 
-class CalculatorTransformer(Transformer):
+class Calculator(Transformer):
     def plus(self, items):
         return ('plus', items[0], items[1])
 
@@ -33,6 +33,7 @@ class CalculatorTransformer(Transformer):
 
     def parens(self, items):
         return items[0]
+    
 
 
 def evaluate(ast):
@@ -57,7 +58,7 @@ def evaluate(ast):
 
 
 if __name__ == '__main__':
-    calc_transformer = CalculatorTransformer()
+    calc_transformer = Calculator()
     input_string = sys.argv[1]  
     tree = parser.parse(input_string) 
     ast = calc_transformer.transform(tree)  
