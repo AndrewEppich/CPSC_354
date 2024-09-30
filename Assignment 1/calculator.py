@@ -1,6 +1,6 @@
 import sys
 
-def operators(op):
+def precedence(op):
     if op == '+':
         return 1
     if op == '*':
@@ -42,7 +42,7 @@ def evaluate_expression(expression):
                 apply_operator(operators, values)
             operators.pop()
         else:
-            while (operators and operators(operators[-1]) >= operators(expression[i])):
+            while (operators and precedence(operators[-1]) >= precedence(expression[i])):
                 apply_operator(operators, values)
             operators.append(expression[i])
         i += 1
