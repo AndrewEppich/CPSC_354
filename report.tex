@@ -11,6 +11,8 @@
 \usepackage{graphicx}
 \usepackage{stmaryrd}
 \usepackage{float}
+\usepackage{amsmath}
+
 
 
 
@@ -255,7 +257,7 @@ How complex do parsing algorithms get the farther down the level of programming 
 \subsection{Question 3}
 
 \begin{lstlisting}
-  exact \llangle a,i\rrangle, \llangle o,u\rrangle
+  exact <a,i>, <o,u>
 \end{lstlisting}
 
 \subsection{Question 4}
@@ -276,7 +278,7 @@ How complex do parsing algorithms get the farther down the level of programming 
 \begin{lstlisting}
   have a:= and_left h1
   have b := and_right h2
-  exact \llangle a, b\rrangle
+  exact < a, b>
 \end{lstlisting}
 
 \subsection{Question 7}
@@ -300,7 +302,7 @@ How complex do parsing algorithms get the farther down the level of programming 
   have h7 := and_left h1
   have h8 := and_left h7
   have h9 := and_right h7
-  exact \llangle h6, h5, h8, h9\rrangle
+  exact < h6, h5, h8, h9>
 \end{lstlisting}
 
 \subsubsection{Proof Explaination}
@@ -308,5 +310,75 @@ I took the left and right sides and set them equal to different variables. Next 
 
 \subsection{Discord Question}
 When thinking about the final Lean problem on the homework, I solved it by breaking up each term over and over again with and\_left and and\_right until there were single terms. It was like a tree forming a new branch and leaves every time the equation was broken up. My question is, how is the logic of AND and and\_left and and\_right used in programming languages and other applications? And is this just the logic that is used to parse a BST?	
+
+\section{Homework 6}\label{homework6}
+
+\subsection{Lecture Explaination}
+
+\begin{lstlisting}
+In lecture this week we started learning about lambda caclulus. We learned about the syntax of P -> Q. We learned about the rule of how to eliminate so we can prove P -> Q by saying P is evidence of B so h \( A \) :B. We also learned that we can use lambda to create a function of terms that is able to be broken apart. We alsp learned the transitive property that says \( P -> Q \) -> \( Q -> R \) -> P -> R.
+\end{lstlisting}
+
+\subsection{Question 1}
+
+\begin{lstlisting}
+exact bakery_service p
+\end{lstlisting}
+
+\subsection{Question 2}
+
+\begin{lstlisting}
+  have h1 : C -> C := fun C \mapsto C
+  exact h1
+  \end{lstlisting}
+  
+  \subsection{Question 3}
+  
+  \begin{lstlisting}
+    exact fun h : I \mapsto and_intro (and_right h) h.left
+    \end{lstlisting}
+
+
+\subsection{Question 4}
+
+\begin{lstlisting}
+exact fun c => h2 (h1 c)
+\end{lstlisting}
+
+\subsection{Question 5}
+
+\begin{lstlisting}
+have q : Q := h1 p
+have t : T := h3 q
+exact h5 t
+\end{lstlisting}
+
+\subsection{Question 6}
+
+\begin{lstlisting}
+exact fun c => fun d => h <c, d>
+\end{lstlisting}
+
+\subsection{Question 7}
+
+\begin{lstlisting}
+exact fun h1 => h h1.1 h1.2
+\end{lstlisting}
+
+\subsection{Question 8}
+
+\begin{lstlisting}
+exact fun s => < h.1 s, h.2 s>
+\end{lstlisting}
+
+\subsection{Question 9}
+
+\begin{lstlisting}
+exact fun r => < fun s => r, fun ns => r>
+\end{lstlisting}
+
+\subsection{Discord Question}
+
+
 
 \end{document}
