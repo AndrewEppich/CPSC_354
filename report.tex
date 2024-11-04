@@ -430,4 +430,89 @@ The function takes two Church numerals m and n and applies m to n. Applying m to
 
 how complex does lambda calculus recursion get in computer systems?
 
+
+\section{Homework 8-9}\label{homework89}
+
+\subsection{Question 2}
+
+  a b c d reduces to that because in the code it parses the expression and characterizes it as app which is in the lark grammar defined as exp1 exp2 so it takes a and b and puts parenthesis around it. Then it goes to the next expression whcih is /(a + b /) and then gets the next term which is c so it puts parenthesis around /(a + b /) and c. Then it does this process again with d. then if you have /(a/) it will just return a because in lark grammar it is characterized as var. In the code if the expression is var it returns just the term in the parenthesis so it just returns a
+
+\subsection{Question 3}
+
+Capture avoiding subsittuion works because when when substituting variables, if there is a free variable in the expression then substituting variables in the equation can cause the expression to change its meaning. Capture-avoiding substitutions avoid capturing free variables in the expression when changing a variable which can cause the whole expression to change its meaning. in the code it checks bound variable matches the substitution target, if it does it leaves it unchanged if not it generates a new variable
+
+\subsection{Question 4}
+
+We do not always get the expected results. Well-defined expressions typically return the expected results, but if there is an error handling an edge case, it would not return the expected results. Not all computations reduce to normal form. Expressions like \((\lambda x. \, x \, x)\) and \((\lambda x. \, x \, x)\) create an infinite loop of self-application that will never be stable.
+
+\subsection{Question 5}
+
+This is the smallest lambda function that doesn’t reduce to normal form: \((\lambda x. \, x \, x) \, (\lambda x. \, x \, x)\). This reduces to itself, so there is no normal form.
+
+\subsection{Quesdtion 7}
+
+\textbf{Initial Expression}:
+\[
+((\lambda m.\, \lambda n.\, m \, n) \, (\lambda f.\, \lambda x.\, f \, (f \, x))) \, (\lambda f.\, \lambda x.\, f \, (f \, (f \, x)))
+\]
+
+\textbf{First Application}:
+Apply \((\lambda m.\, \lambda n.\, m \, n)\) to \((\lambda f.\, \lambda x.\, f \, (f \, x))\):
+\[
+(\lambda n.\, (\lambda f.\, \lambda x.\, f \, (f \, x)) \, n)
+\]
+
+\textbf{Second Application}:
+Now apply \((\lambda n.\, (\lambda f.\, \lambda x.\, f \, (f \, x)) \, n)\) to \((\lambda f.\, \lambda x.\, f \, (f \, (f \, x)))\), substituting \(n\) with \((\lambda f.\, \lambda x.\, f \, (f \, (f \, x)))\):
+\[
+(\lambda f.\, \lambda x.\, f \, (f \, x)) \, (\lambda f.\, \lambda x.\, f \, (f \, (f \, x)))
+\]
+
+\textbf{Evaluating the Final Application}:
+Substitute \((\lambda f.\, \lambda x.\, f \, (f \, (f \, x)))\) for \(f\) in \((\lambda f.\, \lambda x.\, f \, (f \, x))\):
+\[
+\lambda x.\, ((\lambda f.\, \lambda x.\, f \, (f \, (f \, x))) \, x)
+\]
+
+\textbf{Result}:
+The final expression (in normal form) is:
+\[
+\lambda x.\, (\lambda f.\, \lambda x.\, f \, (f \, (f \, x))) \, x
+\]
+
+\subsection{Question 8}
+
+\begin{verbatim}
+  12: evaluate(((\m.\n. m n) (\f.\x. f (f x))) (\f.\x. f x))
+      39: evaluate((\m.\n. m n) (\f.\x. f (f x)))
+          12: evaluate(\m.\n. m n) = \m.\n. m n
+          12: evaluate(\f.\x. f (f x)) = \f.\x. f (f x)
+          51: substitute(\n. m n, m, (\f.\x. f (f x)))
+              51: substitute((\f.\x. f (f x)) n, n, (\f.\x. f x))
+          12: evaluate((\n. (\f.\x. f (f x)) n))
+              51: substitute((\f.\x. f (f x)) n, n, (\f.\x. f x))
+      39: evaluate((\f.\x. f (f x)) (\f.\x. f x))
+          51: substitute((\x. f (f x)), f, (\f.\x. f x))
+              51: substitute((\x. ((\f.\x. f x) ((\f.\x. f x) x))), f, (\f.\x. f x))
+  \end{verbatim}
+
+\subsection{Discord Questions}
+
+Week 8: What does it mean in terms of a programming language output when something does not reduce to normal form
+
+Week 9: how often is tracing used in the debugger in industry
+
+
+\section{Homework 10}\label{homework10}
+
+1. I found that figuring out the debugger and how to use the print statements like print(linearize(x)) was the hardest aspect because it took a while for me to get it to work
+
+2. I came up with the key insight because I was struggling to figure out how to make sure the MWE returned the correct result. I figured out that if the expressions were identical then the result would be the same as the expressions. So i added a part that checked for that
+
+3. The most interesting takeaway from this was learning how to use code to evaluate the lambda expressions
+
+\subsection{Discord Question}
+
+week 10: what aspects if coding prompts substitutions to be made to evaluate it
+
 \end{document}

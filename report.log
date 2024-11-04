@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  13 OCT 2024 22:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  3 NOV 2024 23:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -347,7 +347,7 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count296
 \l__pdf_internal_box=\box57
 )
-(./report.aux)
+No file report.aux.
 \openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
@@ -368,7 +368,6 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
-
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count297
@@ -392,8 +391,6 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package hyperref Info: Link coloring ON on input line 65.
-
-(./report.out) (./report.out)
 \@outlinefile=\write3
 \openout3 = `report.out'.
 
@@ -413,54 +410,64 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Trying to load font information for U+stmry on input line 6
 8.
 
-(/usr/local/texlive/2024/texmf-dist/tex/latex/stmaryrd/Ustmry.fd) (./report.toc
-[1
-
-{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
+(/usr/local/texlive/2024/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
+No file report.toc.
 \tf@toc=\write4
 \openout4 = `report.toc'.
 
+[1
 
-[2] [3] [4]
-<CPSC_354_Homework_4.pdf, id=343, page=1, 597.23125pt x 845.1575pt>
+{/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+[2] [3]
+<CPSC_354_Homework_4.pdf, id=121, page=1, 597.23125pt x 845.1575pt>
 File: CPSC_354_Homework_4.pdf Graphic file (type pdf)
 <use CPSC_354_Homework_4.pdf, page 1>
 Package pdftex.def Info: CPSC_354_Homework_4.pdf , page1 used on input line 226
 .
 (pdftex.def)             Requested size: 328.82707pt x 465.32811pt.
- [5]
-<CPSC_354_Homework_4.pdf, id=350, page=2, 597.23125pt x 845.1575pt>
+ [4]
+<CPSC_354_Homework_4.pdf, id=129, page=2, 597.23125pt x 845.1575pt>
 File: CPSC_354_Homework_4.pdf Graphic file (type pdf)
 <use CPSC_354_Homework_4.pdf, page 2>
 Package pdftex.def Info: CPSC_354_Homework_4.pdf , page2 used on input line 233
 .
 (pdftex.def)             Requested size: 328.82707pt x 465.32811pt.
- [6
+ [5
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.237 
-       <./CPSC_354_Homework_4.pdf>] [7
+       <./CPSC_354_Homework_4.pdf>] [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.251 \subsection
-                 {Question 2} <./CPSC_354_Homework_4.pdf>] [8] [9] [10]
+                 {Question 2} <./CPSC_354_Homework_4.pdf>] [7] [8] [9] [10]
 [11] (./report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 8921D528567E4BDE2ED59858A0C553E1;5465.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report.out':
+(rerunfilecheck)             Before: <no file>
+(rerunfilecheck)             After:  191268016C38EFA8EF863A2C8F0B1727;6781.
  ) 
 Here is how much of TeX's memory you used:
- 12597 strings out of 474116
- 185650 string characters out of 5743682
+ 12553 strings out of 474116
+ 184992 string characters out of 5743682
  2000187 words of memory out of 5000000
- 34608 multiletter control sequences out of 15000+600000
+ 34561 multiletter control sequences out of 15000+600000
  568098 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,79p,1311b,1986s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -473,10 +480,10 @@ sr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr
 ocal/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
 al/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/loca
 l/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on report.pdf (11 pages, 1632969 bytes).
+Output written on report.pdf (11 pages, 1632534 bytes).
 PDF statistics:
- 520 PDF objects out of 1000 (max. 8388607)
- 478 compressed objects within 5 object streams
- 189 named destinations out of 1000 (max. 500000)
- 387 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 343 PDF objects out of 1000 (max. 8388607)
+ 302 compressed objects within 4 object streams
+ 200 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
