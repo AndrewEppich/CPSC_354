@@ -1,0 +1,35 @@
+?start: exp
+
+?exp: lam
+    | exp1
+
+?lam: "\\" NAME "." exp             -> lam
+
+?exp1: exp1 "+" exp2                -> plus
+     | exp1 "-" exp2                -> minus
+     | exp2
+
+?exp2: exp2 "*" exp3                -> times
+     | exp3
+
+?exp3: "-" exp4                     -> neg
+     | exp4
+
+?exp4: var
+     | num
+     | "(" exp ")"                  -> parens
+     | app
+
+var: NAME                           -> var
+num: NUMBER                         -> num
+
+app: "(" exp ")" exp                -> app
+
+NAME: /[a-z_][a-zA-Z0-9_]*/
+NUMBER: /-?\d+(\.\d+)?/
+
+%import common.WS
+%ignore WS
+
+%ignore /\/\/[^\n]*/
+%ignore /\/\*[\s\S]*?\*\//
