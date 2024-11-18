@@ -537,4 +537,60 @@ week 10: what aspects if coding prompts substitutions to be made to evaluate it
 If an ARS is not terminating is that a similar situation to when code has an infinite loop
 
 
+\section{Homework 12}\label{homework12}
+
+\subsection{Exercise 1}
+
+* The ARS terminates because it is reduced to a unique form 
+* The result of the computation is ab, which is the sorted version of the original
+* It is unique because it is sorted so it can not be reduced anymore
+* This algorithm implements bubble sort
+
+\subsection{Exercise 2}
+
+* The ARS terminates because it cannot be reduced any more
+* The normal forms are a and b
+* There is no string that will reduce to a and b, there have to be an even number of a to reduce to a but there have to be an odd number of b to reduce to a
+* It is confluent because all reductions lead to a unique normal form
+* If you replace -> with = then aa = bb and ab = ba
+* The expression is equal to a when there is an even number of bs and equal to be if there are an odd number of bs
+* Even count of bs → a, odd count of bs → b
+* The algorithm computes whether there is an odd or even amount of bs
+
+\subsection{Exercise 3}
+
+* The algorithm does not terminate because when ba -> ab and ab -> ba so there is an infinite loop of reduction
+* There are no normal forms because it does not terminate
+* Change ab → ba to ab → b
+* The algorithm removes duplicates from the string
+
+\subsection{Exercise 4}
+
+* The ARS does not terminate because ab → ba and ba → ab makes an infinite loop
+* There are no normal forms because it does not terminate
+* The results are not confluent because they do not reduce to a unique result
+* This algorithm allows a and b to be switched to find all permutations of sequences with ab
+
+\subsection{Exercise 5}
+
+* abba → abba , bababa → bababa
+* It is not terminating because ab → ba and ba → ab allow looping
+* One class for each combination of counts of as and bs, there are no normal forms
+* You can modify ba → ab to ba → b
+* One question you can answer using this ARS is if two strings are equivalent 
+
+\subsection{Exercise 5b}
+
+* abba → abba, bababa → bababa
+* It does not terminate because ab → ba and ba → ab allow for infinite looping
+* The equivalence classes are the count of as modulo 2, and complete removal of bs the 
+* Normal forms are both a
+* Is the parity of as preserved in the equivalence class
+
+
+
+
+
+
+
 \end{document}
