@@ -65,3 +65,4 @@
 \contentsline {subsection}{\numberline {12.4}Exercise 4}{14}{subsection.12.4}%
 \contentsline {subsection}{\numberline {12.5}Exercise 5}{14}{subsection.12.5}%
 \contentsline {subsection}{\numberline {12.6}Exercise 5b}{14}{subsection.12.6}%
+\contentsline {subsection}{\numberline {12.7}Discord Question}{14}{subsection.12.7}%
