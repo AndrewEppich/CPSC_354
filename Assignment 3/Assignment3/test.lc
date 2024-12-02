@@ -1,9 +1,0 @@
--- (a)
--- (\x.x) a
--- (\x.\y.x) a b
--- (\x.\y.y) a b
-((\m.\n. m n) (\f.\x. f (f x))) (\f.\x. f (f (f x))) 
--- (\x.(\y.yx))a b
--- ((\m.\n. m n) (\f.\x. f (f x))) (\f.\x. f (f (f x)))
--- (\x.xx)(\x.xx) a b
--- (\x.\y. xy)(\x.\y. xy)

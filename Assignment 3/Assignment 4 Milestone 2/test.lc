@@ -1,0 +1,17 @@
+-- if 0 <= 1 then 6 else 7
+-- if 0 then 2 else 1
+-- if 1 then 2 else 2
+-- if 0 then 2 else if 1 then 3 else 4
+-- if 0 then 2 else if 0 then 3 else 4
+-- if 0 == 0 then 5 else 6
+-- if 0 <= 1 then 6 else 7
+-- if 1 <= 0 then 6 else 7
+-- let x = 1 in if x == 1 then 8 else 9
+-- let x = 0 in if x == 1 then 8 else 9
+-- let f = \x.x in f 10
+-- let f = \x.x+1 in f 10
+-- let f = \x.x*6 in let g = \x.x+1 in f (g 1)
+-- let f = \x.x*6 in let g = \x.x+1 in g (f 2)
+-- let f = \x.x*6 in let f = \x.x+1 in f (f 2) + 10
+-- letrec f = \n. if n==0 then 1 else n*f(n-1) in f 4
+ letrec f = \n. if n==0 then 0 else 1 + 2*(n-1) + f(n-1) in f 6

@@ -112,19 +112,23 @@ def test_evaluate():
     assert linearize(evaluate(ast(r"(\x.x) y"))) == "y"
     print(f"EVAL {MAGENTA}(\\x.x) y{RESET} == y")
 
-    print("\nevaluate(): All tests passed!\n")
 
-def test_interpret():
-    print(f"Testing x --> {interpret('x')}")
-    print(f"Testing x y --> {interpret('x y')}")
-    input=r"\x.x"; output = interpret(input); print(f"Testing {input} --> {output}")
-    input=r"(\x.x) y"; output = interpret(input); print(f"Testing {input} --> {output}")
-    input=r"(\x.\y.x y) y"; output = interpret(input); print(f"Testing {input} --> {output}")
 
-    print("\ninterpret(): All tests passed!\n")
+def test_arithmetic_operations():
+    assert interpret(r"1 + 2") == 3.0
+    assert interpret(r"3 - 2") == 1.0
+    assert interpret(r"2 * 3") == 6.0
+    assert interpret(r"-4") == -4.0
+    assert interpret(r"1 - 2 * 3 - 4") == -9.0
+    assert interpret(r"((\x.x * x) 2) * 3") == 12.0
+    assert interpret(r"((\x.x * x) (-2)) * (-3)") == -12.0
+    assert interpret(r"((\x.x * x) (-2)) * (-3)") == -12.0
+    assert interpret(r"((\x.x) -)--2)") == -2.0
+    assert interpret(r"(\x.x) (1--2)") == 3.0
+
 
 if __name__ == "__main__":
     print(Fore.GREEN + "\nTEST PARSING\n" + Style.RESET_ALL); test_parse()
     print(Fore.GREEN + "\nTEST SUBSTITUTION\n" + Style.RESET_ALL); test_substitute()
     print(Fore.GREEN + "\nTEST EVALUATION\n" + Style.RESET_ALL); test_evaluate()
-    print(Fore.GREEN + "\nTEST INTERPRETATION\n" + Style.RESET_ALL); test_interpret()
+    print(Fore.GREEN + "\nTEST INTERPRETATION\n" + Style.RESET_ALL); test_arithmetic_operations()

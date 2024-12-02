@@ -1,0 +1,47 @@
+?start: exp
+
+?exp: lam
+    | let
+    | letrec
+    | fix
+    | if_expr
+    | exp1
+
+?lam: "\\" NAME "." exp             -> lam
+
+?exp1: exp1 "+" exp2                -> plus
+     | exp1 "-" exp2                -> minus
+     | exp2                         // Exp1 delegates to Exp2 for lower precedence
+
+?exp2: exp2 "*" exp3                -> times
+     | exp3                         // Exp2 delegates to Exp3 for lower precedence
+
+?exp3: exp4 "==" exp4               -> equals
+     | exp4 "!=" exp4               -> not_equals
+     | exp4 "<" exp4                -> less_than
+     | exp4 ">" exp4                -> greater_than
+     | exp4 "<=" exp4               -> less_or_equal
+     | exp4 ">=" exp4               -> greater_or_equal
+     | exp4                         // Exp3 delegates to Exp4 for lowest precedence
+
+?exp4: var
+     | num
+     | "(" exp ")"                  -> parens
+     | app
+
+?app: exp4 exp4                     -> app   // Ensures left-associative application
+
+?if_expr: "if" exp "then" exp "else" exp -> if_expr
+?let: "let" NAME "=" exp "in" exp        -> let
+?letrec: "letrec" NAME "=" exp "in" exp  -> letrec
+?fix: "fix" exp                          -> fix
+
+var: NAME                               -> var
+num: NUMBER                             -> num
+
+NAME: /[a-z_][a-zA-Z0-9_]*/
+NUMBER: /-?\d+(\.\d+)?/
+COMMENT: "--" /[^\n]*/
+
+%ignore COMMENT
+%ignore /\s+/
