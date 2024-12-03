@@ -14,4 +14,4 @@
 -- let f = \x.x*6 in let g = \x.x+1 in g (f 2)
 -- let f = \x.x*6 in let f = \x.x+1 in f (f 2) + 10
 -- letrec f = \n. if n==0 then 1 else n*f(n-1) in f 4
- letrec f = \n. if n==0 then 0 else 1 + 2*(n-1) + f(n-1) in f 6
+-- letrec f = \n. if n==0 then 0 else 1 + 2*(n-1) + f(n-1) in f 6

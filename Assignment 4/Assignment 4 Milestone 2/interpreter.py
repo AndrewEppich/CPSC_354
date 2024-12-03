@@ -5,8 +5,8 @@ from lark import Lark, Transformer, Tree
 def interpret(source_code):
     cst = parser.parse(source_code)
     ast = LambdaCalculusTransformer().transform(cst)
-    env = {}  # Initialize the environment
-    result_ast = evaluate(ast, env)  # Pass the environment to evaluate
+    env = {} 
+    result_ast = evaluate(ast, env)
     result = linearize(result_ast)
     return result
 
@@ -37,18 +37,6 @@ class LambdaCalculusTransformer(Transformer):
     def times(self, args):
         return ('times', *args)
 
-    def neg(self, args):
-        return ('neg', args[0])
-
-    def if_expr(self, args):
-        return ('if', *args)
-
-    def leq(self, args):
-        return ('leq', *args)
-
-    def eq(self, args):
-        return ('eq', *args)
-
     def let(self, args):
         name, value, body = args
         return ('let', str(name), value, body)
@@ -65,102 +53,188 @@ class LambdaCalculusTransformer(Transformer):
 
     def NAME(self, token):
         return str(token)
+    
+    def leq(self, args):
+        return ('leq', *args)
 
-def evaluate(tree, env):
-    if isinstance(tree, Tree):
-        # Extract the operation (first element) and its arguments (children)
-        op = tree.data
-        children = tree.children
-    else:
-        return tree  # If the node is not a Tree, it's a value like a number or string
-    
-    print(f"Evaluating {tree} with environment {env}")  # Debugging print to check evaluation
+    def eq(self, args):
+        return ('eq', *args)
 
-    # Evaluate the tree based on its operation type
-    if op == 'lam':
-        # Lambda function: \x. expression
-        var = children[0]
-        body = children[1]
-        return lambda arg: evaluate(body, {**env, var: arg})
-    
-    elif op == 'app':
-        # Function application: (f x)
-        func = evaluate(children[0], env)  # The function (should be a lambda)
-        arg = evaluate(children[1], env)  # The argument
-        print(f"Applying function {func} to argument {arg}")
-        return func(arg)  # Apply the function
-    
-    elif op == 'letrec':
-        # Recursive let: letrec f = \n. body in f 4
-        func_name = children[0]
-        func_def = children[1]  # Lambda definition of f
-        body = children[2]  # Body of the function call
+    def neg(self, args):
+        return ('neg', args[0])
+
+    def if_expr(self, args):
+        return ('if', *args)
+
+
+def evaluate(ast, env):
+    if isinstance(ast, Tree):
+        node_type = ast.data
+        children = ast.children
         
-        # First, define the recursive function as a placeholder in the environment
-        def recursive_func(arg):
-            # We will bind the function name to itself in the local environment for recursion
-            new_env = {**env, func_name: recursive_func}
-            return evaluate(func_def, {**new_env, 'n': arg})
-
-        # Bind the recursive function to the environment
-        env[func_name] = recursive_func
-
-        # Now evaluate the function call with the extended environment
-        result = evaluate(body, env)  # Evaluate the body of the letrec expression
-        print(f"Letrec result: {result}")  # Debugging print to check the final result
-        return result
-    
-    elif op == 'if':
-        # If expression: if condition then expr1 else expr2
-        condition = evaluate(children[0], env)
-        if condition != 0:  # If the condition is true (non-zero)
-            return evaluate(children[1], env)
+        if node_type == "if":
+            condition = evaluate(children[0], env)
+            if condition:
+                return evaluate(children[1], env)
+            else:
+                return evaluate(children[2], env)
+        elif node_type == "num":
+            return float(children[0])
+        elif node_type == "var":
+            var_name = children[0]
+            if var_name in env:
+                return env[var_name]
+            else:
+                raise ValueError(f"Undefined variable: {var_name}")
+        elif node_type == "lam":
+            param = children[0]
+            body = children[1]
+            return ("lam", param, body, env)
+        elif node_type == "app":
+            func = evaluate(children[0], env)
+            arg = evaluate(children[1], env)
+            if func[0] == "lam":
+                param = func[1]
+                body = func[2]
+                func_env = func[3]
+                new_env = func_env.copy()
+                new_env[param] = arg
+                return evaluate(body, new_env)
+            else:
+                raise ValueError(f"Trying to apply a non-function: {func}")
+        elif node_type == "let":
+            var_name = children[0]
+            var_value = evaluate(children[1], env)
+            body = children[2]
+            new_env = env.copy()
+            new_env[var_name] = var_value
+            return evaluate(body, new_env)
+        
+        elif node_type == "letrec":
+            func_name = children[0]
+            func_lambda = children[1]
+            func_body = func_lambda[1]
+            new_env = env.copy()
+            new_env[func_name] = ("lam", func_lambda[0], func_body, new_env)
+            print(f"letrec environment for {func_name}: {new_env}")
+            result = evaluate(children[2], new_env)
+            print(f"letrec result for {func_name}: {result}")
+            return result
+        elif node_type == "plus":
+            # Evaluate both sides of the plus operation
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left + right
+        elif node_type == "minus":
+            # Evaluate both sides of the minus operation
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left - right
+        elif node_type == "times":
+            # Evaluate both sides of the times operation
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left * right
+        elif node_type == "less_or_equal":
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left <= right
+        elif node_type == "equals":
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left == right
+        elif node_type == "greater_or_equal":
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left >= right
+        elif node_type == "greater_than":
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left > right
+        elif node_type == "less_than":
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left < right
         else:
-            return evaluate(children[2], env)
-    
-    elif op == 'equals':
-        # Equality comparison: (a == b)
-        left = evaluate(children[0], env)
-        right = evaluate(children[1], env)
-        return 1 if left == right else 0
-    
-    elif op == 'var':
-        # Variable reference
-        var_name = children[0]
-        if var_name in env:
-            return env[var_name]
+            raise ValueError(f"Unknown node type: {node_type}")
+
+    elif isinstance(ast, tuple):
+        node_type = ast[0]
+        children = ast[1:]
+
+        if node_type == "if":
+            condition = evaluate(children[0], env)
+            if condition:
+                return evaluate(children[1], env)
+            else:
+                return evaluate(children[2], env)
+        elif node_type == "num":
+            return float(children[0])
+        elif node_type == "var":
+            var_name = children[0]
+            if var_name in env:
+                return env[var_name]
+            else:
+                raise ValueError(f"Undefined variable: {var_name}")
+        elif node_type == "let":
+            var_name = children[0]
+            var_value = evaluate(children[1], env)
+            body = children[2]
+            new_env = env.copy()
+            new_env[var_name] = var_value
+            return evaluate(body, new_env)
+        elif node_type == "lam":
+            param = children[0]
+            body = children[1]
+            return ("lam", param, body, env)
+        elif node_type == "app":
+            func = evaluate(children[0], env)
+            arg = evaluate(children[1], env)
+            if func[0] == "lam":
+                param = func[1]
+                body = func[2]
+                func_env = func[3]
+                new_env = func_env.copy()
+                new_env[param] = arg
+                return evaluate(body, new_env)
+            
+        elif node_type == "letrec":
+            func_name = children[0]
+            print(f"{func_name}")
+            func_lambda = children[1]
+            print(f"{func_lambda}")
+            func_body = func_lambda[1]
+            print(f"{func_lambda[1]}")
+            new_env = env.copy()
+            print(f"{new_env}")
+            new_env[func_name] = ("lam", func_lambda[0], func_body, new_env)
+            print(f"{new_env}")
+            print(f"letrec environment for {func_name}: {new_env}")
+            result = evaluate(children[2], new_env)
+            print(f"letrec result for {func_name}: {result}")
+            return result
+        elif node_type == "plus":
+            # Evaluate both sides of the plus operation
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left + right
+        elif node_type == "minus":
+            # Evaluate both sides of the minus operation
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left - right
+        elif node_type == "times":
+            # Evaluate both sides of the times operation
+            left = evaluate(children[0], env)
+            right = evaluate(children[1], env)
+            return left * right
         else:
-            raise ValueError(f"Unknown variable: {var_name}")
-    
-    elif op == 'num':
-        # Number literal
-        return children[0]  # Return the number directly
-    
-    elif op == 'plus':
-        # Addition: (a + b)
-        left = evaluate(children[0], env)
-        right = evaluate(children[1], env)
-        return left + right
-    
-    elif op == 'times':
-        # Multiplication: (a * b)
-        left = evaluate(children[0], env)
-        right = evaluate(children[1], env)
-        return left * right
-    
-    elif op == 'minus':
-        # Subtraction: (a - b)
-        left = evaluate(children[0], env)
-        right = evaluate(children[1], env)
-        return left - right
-    
-    elif op == 'neg':
-        # Negation: (-a)
-        value = evaluate(children[0], env)
-        return -value
-    
-    else:
-        raise ValueError(f"Unknown operation: {op}")
+            raise ValueError(f"Unsupported tuple node: {ast}")
+
+
+
+
+
 
 class NameGenerator:
     def __init__(self):
@@ -210,32 +284,70 @@ def substitute(tree, name, replacement):
         raise Exception('Unknown tree', tree)
 
 def linearize(ast):
+    if ast is None:
+        raise ValueError(f"Unsupported AST node: None")
     if isinstance(ast, Tree):
-        # Extract tree data and children
-        ast_data = ast.data
-        ast_children = ast.children
-    else:
-        # If it's not a Tree, it should be a literal value (number, etc.)
+        node_type = ast.data
+        children = ast.children
+
+        if node_type == "if":
+            return f"if {linearize(children[0])} then {linearize(children[1])} else {linearize(children[2])}"
+        elif node_type == "var":
+            return children[0]
+        elif node_type == "num":
+            return str(children[0])
+        elif node_type == "plus":
+            return f"({linearize(children[0])} + {linearize(children[1])})"
+        elif node_type == "minus":
+            return f"({linearize(children[0])} - {linearize(children[1])})"
+        elif node_type == "times":
+            return f"({linearize(children[0])} * {linearize(children[1])})"
+        elif node_type == "leq":
+            return f"({linearize(children[0])} <= {linearize(children[1])})"
+        elif node_type == "eq":
+            return f"({linearize(children[0])} == {linearize(children[1])})"
+        elif node_type == "neg":
+            return f"(-{linearize(children[0])})"
+        elif node_type == "lam":
+            return f"(\\{children[0]}. {linearize(children[1])})"
+        elif node_type == "app":
+            return f"({linearize(children[0])} {linearize(children[1])})"
+        elif node_type == "let":
+            return f"let {children[0]} = {linearize(children[1])} in {linearize(children[2])}"
+        elif node_type == "letrec":
+            print(f"letrec {children[0]} = {linearize(children[1])} in {linearize(children[2])}")
+            return f"letrec {children[0]} = {linearize(children[1])} in {linearize(children[2])}"
+        else:
+            raise ValueError(f"Unknown node type: {node_type}")
+
+    elif isinstance(ast, tuple):
+        # Handle tuples as nodes
+        node_type = ast[0]
+        children = ast[1:]
+
+        if node_type == "if":
+            return f"if {linearize(children[0])} then {linearize(children[1])} else {linearize(children[2])}"
+        elif node_type == "less_or_equal":
+            return f"({linearize(children[0])} <= {linearize(children[1])})"
+        elif node_type == "let":
+            return f"let {children[0]} = {linearize(children[1])} in {linearize(children[2])}"
+        elif node_type == "lam":
+            return f"(\\{children[0]}. {linearize(children[1])})"
+        elif node_type == "app":
+            return f"({linearize(children[0])} {linearize(children[1])})"
+        elif node_type == "num":
+            return str(children[0])
+        elif node_type == "var":
+            return children[0]
+        else:
+            raise ValueError(f"Unsupported tuple node: {ast}")
+
+    elif isinstance(ast, str):  # Handle string values directly
+        return ast
+    elif isinstance(ast, (int, float)):  # Handle numeric literals
         return str(ast)
-
-    if ast_data == 'lam':
-        # Lambda function
-        return f"\\{ast_children[0]}.{linearize(ast_children[1])}"
-    elif ast_data == 'app':
-        # Function application
-        return f"({linearize(ast_children[0])} {linearize(ast_children[1])})"
-    elif ast_data == 'letrec':
-        # Recursive let
-        return f"letrec {ast_children[0]} = {linearize(ast_children[1])} in {linearize(ast_children[2])}"
-    elif ast_data == 'var':
-        # Variable
-        return str(ast_children[0])
-    elif ast_data == 'num':
-        # Number literal
-        return str(ast_children[0])
     else:
-        return f"Unknown: {ast_data}"
-
+        raise ValueError(f"Unsupported AST node: {ast}")
 
 
 def main():
