@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  27 NOV 2024 16:32
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.8.29)  3 DEC 2024 22:36
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -422,14 +422,14 @@ LaTeX Font Info:    Trying to load font information for U+stmry on input line 6
 
 
 [2] [3] [4]
-<CPSC_354_Homework_4.pdf, id=434, page=1, 597.23125pt x 845.1575pt>
+<CPSC_354_Homework_4.pdf, id=439, page=1, 597.23125pt x 845.1575pt>
 File: CPSC_354_Homework_4.pdf Graphic file (type pdf)
 <use CPSC_354_Homework_4.pdf, page 1>
 Package pdftex.def Info: CPSC_354_Homework_4.pdf , page1 used on input line 226
 .
 (pdftex.def)             Requested size: 328.82707pt x 465.32811pt.
  [5]
-<CPSC_354_Homework_4.pdf, id=456, page=2, 597.23125pt x 845.1575pt>
+<CPSC_354_Homework_4.pdf, id=461, page=2, 597.23125pt x 845.1575pt>
 File: CPSC_354_Homework_4.pdf Graphic file (type pdf)
 <use CPSC_354_Homework_4.pdf, page 2>
 Package pdftex.def Info: CPSC_354_Homework_4.pdf , page2 used on input line 233
@@ -449,13 +449,13 @@ s been already used, duplicate ignored
 l.251 \subsection
                  {Question 2} <./CPSC_354_Homework_4.pdf>] [8] [9] [10]
 [11]
-<HW11.pdf, id=545, page=1, 614.295pt x 794.97pt>
+<HW11.pdf, id=550, page=1, 614.295pt x 794.97pt>
 File: HW11.pdf Graphic file (type pdf)
 <use HW11.pdf, page 1>
 Package pdftex.def Info: HW11.pdf , page1 used on input line 522.
 (pdftex.def)             Requested size: 328.82707pt x 425.54129pt.
  [12]
-<HW11.pdf, id=550, page=2, 614.295pt x 794.97pt>
+<HW11.pdf, id=555, page=2, 614.295pt x 794.97pt>
 File: HW11.pdf Graphic file (type pdf)
 <use HW11.pdf, page 2>
 Package pdftex.def Info: HW11.pdf , page2 used on input line 529.
@@ -488,14 +488,14 @@ Package rerunfilecheck Warning: File `report.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: 8849AD2E8CDA93F0AAC4A755118D16A8;7956
-(rerunfilecheck)             After:  6D8A5309D89D37989DFF0B5279F75DC7;8059.
+(rerunfilecheck)             Before: 6D8A5309D89D37989DFF0B5279F75DC7;8059
+(rerunfilecheck)             After:  DBD79213574489DF3A118FAFB575778D;8202.
  ) 
 Here is how much of TeX's memory you used:
- 12679 strings out of 474116
- 186850 string characters out of 5743682
+ 12681 strings out of 474116
+ 186877 string characters out of 5743682
  2000187 words of memory out of 5000000
- 34655 multiletter control sequences out of 15000+600000
+ 34656 multiletter control sequences out of 15000+600000
  570096 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,6n,79p,1311b,1986s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -511,10 +511,10 @@ l/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local
 /texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/
 texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/te
 xlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on report.pdf (16 pages, 2312476 bytes).
+Output written on report.pdf (16 pages, 2312656 bytes).
 PDF statistics:
- 682 PDF objects out of 1000 (max. 8388607)
- 622 compressed objects within 7 object streams
- 218 named destinations out of 1000 (max. 500000)
- 565 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 687 PDF objects out of 1000 (max. 8388607)
+ 627 compressed objects within 7 object streams
+ 219 named destinations out of 1000 (max. 500000)
+ 573 words of extra memory for PDF output out of 10000 (max. 10000000)
 
