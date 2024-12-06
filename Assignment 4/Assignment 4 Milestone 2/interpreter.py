@@ -32,7 +32,10 @@ class LambdaCalculusTransformer(Transformer):
         return ('plus', *args)
 
     def minus(self, args):
-        return ('minus', *args)
+        left, right = args
+        if isinstance(right, tuple) and right[0] == 'num' and str(right[1]).startswith('-'):
+            return ('minus', left, ('num', float(str(right[1])[1:])))
+        return ('minus', left, right)
 
     def times(self, args):
         return ('times', *args)
@@ -65,12 +68,30 @@ class LambdaCalculusTransformer(Transformer):
 
     def if_expr(self, args):
         return ('if', *args)
+    
+    def prog(self, args):
+        return ('prog', *args)
+
+    def hd(self, args):
+        return ('hd', args[0])
+
+    def tl(self, args):
+        return ('tl', args[0])
+
+    def nil(self, args):
+        return ('nil',)
+
+    def cons(self, args):
+        return ('cons', *args)
 
 
 def evaluate(ast, env):
     if isinstance(ast, Tree):
         node_type = ast.data
         children = ast.children
+        if isinstance(ast, (int, float)):
+            raise ValueError(f"Cannot apply a number as a function: {ast}")
+        
         
         if node_type == "if":
             condition = evaluate(children[0], env)
@@ -109,32 +130,30 @@ def evaluate(ast, env):
             new_env = env.copy()
             new_env[var_name] = var_value
             return evaluate(body, new_env)
-        
+
         elif node_type == "letrec":
             func_name = children[0]
             func_lambda = children[1]
             func_body = func_lambda[1]
             new_env = env.copy()
             new_env[func_name] = ("lam", func_lambda[0], func_body, new_env)
-            print(f"letrec environment for {func_name}: {new_env}")
             result = evaluate(children[2], new_env)
-            print(f"letrec result for {func_name}: {result}")
             return result
         elif node_type == "plus":
-            # Evaluate both sides of the plus operation
             left = evaluate(children[0], env)
             right = evaluate(children[1], env)
             return left + right
         elif node_type == "minus":
-            # Evaluate both sides of the minus operation
             left = evaluate(children[0], env)
             right = evaluate(children[1], env)
             return left - right
         elif node_type == "times":
-            # Evaluate both sides of the times operation
             left = evaluate(children[0], env)
             right = evaluate(children[1], env)
-            return left * right
+        # Add type checking to ensure we're working with numbers
+            if not isinstance(left, (int, float)) or not isinstance(right, (int, float)):
+                raise ValueError(f"Multiplication operands must be numbers, got: {left} and {right}")
+            return float(left * right)
         elif node_type == "less_or_equal":
             left = evaluate(children[0], env)
             right = evaluate(children[1], env)
@@ -161,6 +180,8 @@ def evaluate(ast, env):
     elif isinstance(ast, tuple):
         node_type = ast[0]
         children = ast[1:]
+        if isinstance(ast, (int, float)):
+            raise ValueError(f"Cannot apply a number as a function: {ast}")
 
         if node_type == "if":
             condition = evaluate(children[0], env)
@@ -189,6 +210,8 @@ def evaluate(ast, env):
             return ("lam", param, body, env)
         elif node_type == "app":
             func = evaluate(children[0], env)
+            if isinstance(func, (int, float)):
+                raise ValueError(f"Cannot apply a number as a function: {func}")
             arg = evaluate(children[1], env)
             if func[0] == "lam":
                 param = func[1]
@@ -197,22 +220,28 @@ def evaluate(ast, env):
                 new_env = func_env.copy()
                 new_env[param] = arg
                 return evaluate(body, new_env)
+            elif func[0] != "lam":
+                raise ValueError(f"Attempted to apply a non-lambda: {func}")
             
         elif node_type == "letrec":
             func_name = children[0]
-            print(f"{func_name}")
             func_lambda = children[1]
-            print(f"{func_lambda}")
-            func_body = func_lambda[1]
-            print(f"{func_lambda[1]}")
+            # Make sure we're handling the lambda expression correctly
+            if func_lambda[0] != 'lam':
+                raise ValueError(f"Expected lambda expression in letrec, got: {func_lambda}")
+            
+            func_param = func_lambda[1]
+            func_body = func_lambda[2]
+            
+            # Create new environment with recursive binding
             new_env = env.copy()
-            print(f"{new_env}")
-            new_env[func_name] = ("lam", func_lambda[0], func_body, new_env)
-            print(f"{new_env}")
-            print(f"letrec environment for {func_name}: {new_env}")
-            result = evaluate(children[2], new_env)
-            print(f"letrec result for {func_name}: {result}")
-            return result
+            # Create the closure with the new environment
+            closure = ("lam", func_param, func_body, new_env)
+            # Bind the function name to the closure in the new environment
+            new_env[func_name] = closure
+            
+            # Evaluate the body with the recursive binding
+            return evaluate(children[2], new_env)
         elif node_type == "plus":
             # Evaluate both sides of the plus operation
             left = evaluate(children[0], env)
@@ -224,10 +253,12 @@ def evaluate(ast, env):
             right = evaluate(children[1], env)
             return left - right
         elif node_type == "times":
-            # Evaluate both sides of the times operation
             left = evaluate(children[0], env)
             right = evaluate(children[1], env)
-            return left * right
+            # Add type checking to ensure we're working with numbers
+            if not isinstance(left, (int, float)) or not isinstance(right, (int, float)):
+                raise ValueError(f"Multiplication operands must be numbers, got: {left} and {right}")
+            return float(left * right)
         else:
             raise ValueError(f"Unsupported tuple node: {ast}")
 
@@ -342,9 +373,9 @@ def linearize(ast):
         else:
             raise ValueError(f"Unsupported tuple node: {ast}")
 
-    elif isinstance(ast, str):  # Handle string values directly
+    elif isinstance(ast, str):
         return ast
-    elif isinstance(ast, (int, float)):  # Handle numeric literals
+    elif isinstance(ast, (int, float)):
         return str(ast)
     else:
         raise ValueError(f"Unsupported AST node: {ast}")

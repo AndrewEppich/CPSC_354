@@ -1,5 +1,6 @@
 ?start: exp
 
+
 ?exp: lam
     | let
     | letrec
@@ -8,7 +9,7 @@
     | exp1
 
 ?lam: "\\" NAME "." exp             -> lam
-
+     
 ?exp1: exp1 "+" exp2                -> plus
      | exp1 "-" exp2                -> minus
      | exp2                         // Exp1 delegates to Exp2 for lower precedence
@@ -35,6 +36,8 @@
 ?let: "let" NAME "=" exp "in" exp        -> let
 ?letrec: "letrec" NAME "=" exp "in" exp  -> letrec
 ?fix: "fix" exp                          -> fix
+
+
 
 var: NAME                               -> var
 num: NUMBER                             -> num
