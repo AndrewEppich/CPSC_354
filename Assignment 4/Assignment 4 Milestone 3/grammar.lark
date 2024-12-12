@@ -1,0 +1,57 @@
+?start: exp
+
+?exp: lam
+    | let
+    | letrec
+    | fix
+    | if_expr
+    | hd
+    | tl
+    | prog
+    | eq_expr
+
+?eq_expr: cons "==" cons               -> equals
+       | cons "!=" cons                -> not_equals
+       | cons "<" cons                 -> less_than
+       | cons ">" cons                 -> greater_than
+       | cons "<=" cons                -> less_or_equal
+       | cons ">=" cons                -> greater_or_equal
+       | cons
+
+?cons: term ":" cons              -> cons
+     | term
+
+?term: term "+" factor                -> plus
+     | term "-" factor                -> minus
+     | factor
+
+?factor: factor "*" base                -> times
+       | base
+
+?base: var
+     | num
+     | "-" base                      -> neg
+     | "(" exp ")"                  -> parens
+     | base base                    -> app
+     | "#"                          -> nil
+
+?lam: "\\" NAME "." exp             -> lam
+
+?if_expr: "if" exp "then" exp "else" exp -> if_expr
+?let: "let" NAME "=" exp "in" exp        -> let
+?letrec: "letrec" NAME "=" exp "in" exp  -> letrec
+?fix: "fix" exp                          -> fix
+
+?hd: "hd" exp                       -> hd
+?tl: "tl" exp                       -> tl
+?prog: exp ";;" exp                 -> prog
+
+var: NAME                               -> var
+num: NUMBER                             -> num
+
+NAME: /[a-z_][a-zA-Z0-9_]*/
+NUMBER: /\d+(\.\d+)?/
+COMMENT: "--" /[^\n]*/ | "//" /[^\n]*/
+
+%ignore COMMENT
+%ignore /\s+/

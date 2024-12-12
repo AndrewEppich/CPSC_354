@@ -386,40 +386,19 @@ are lambda calculus proofs a part of the compiler? if so, how do they interact w
 
 \subsection{Question 1}
 
-\textbf{Beta Reduction 1:}
-\[
-((\lambda m. \lambda n. m \, n) \, (\lambda f. \lambda x. f(f \, x))) \, (\lambda f. \lambda x. f(f(f \, x)))
-\]
-
-\textbf{Beta Reduction 2:}
-\[
-\lambda n. (\lambda f. \lambda x. f(f \, x)) \, n
-\]
-
-\textbf{Beta Reduction 3:}
-\[
-(\lambda f. \lambda x. f(f \, x)) \, (\lambda f. \lambda x. f(f(f \, x)))
-\]
-
-\textbf{Beta Reduction 4:}
-\[
-\lambda x. (\lambda f. \lambda x. f(f(f \, x))) \, (\lambda f. \lambda x. f(f(f \, x)) \, x)
-\]
-
-\textbf{Beta Reduction 5:}
-\[
-\lambda x. (\lambda x. f(f(f(f(f \, x))))) \, ((\lambda f. \lambda x. f(f(f \, x))) \, x)
-\]
-
-\textbf{Beta Reduction 6:}
-\[
-\lambda x. f(f(f(f(f(f \, x)))))
-\]
-
-\textbf{Beta Reduction 7:}
-\[
-\lambda x. f(f(f(f(f(f(f \, x))))))
-\]
+\begin{align*}
+  & (\lambda m.\lambda n.m \, n)(\lambda f.\lambda x.f(fx))(\lambda f.\lambda x.f(f(fx))) \\
+  & \overset{\beta}{\to} (\lambda n.(\lambda f.\lambda x.f(fx))n)(\lambda f.\lambda x.f(f(fx))) \\
+  & \overset{\beta}{\to} (\lambda f.\lambda x.f(fx))(\lambda f.\lambda x.f(f(fx))) \\
+  & \overset{\beta}{\to} \lambda x.(\lambda f.\lambda x.f(f(fx)))((\lambda f.\lambda x.f(f(fx)))x) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.(\lambda f.\lambda x.f(f(fx)))x((\lambda f.\lambda x.f(f(fx)))x((\lambda f.\lambda x.f(f(fx)))x \, x_1)) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.(\lambda x_1.x(x(xx_1)))((\lambda f.\lambda x.f(f(fx)))x((\lambda f.\lambda x.f(f(fx)))x \, x_1)) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.x(x(x((\lambda f.\lambda x.f(f(fx)))x((\lambda f.\lambda x.f(f(fx)))x \, x_1)))) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.x(x(x((\lambda x_1.x(x(xx_1)))((\lambda f.\lambda x.f(f(fx)))x \, x_1)))) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.x(x(x(x(x(x((\lambda f.\lambda x.f(f(fx)))x \, x_1)))))) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.x(x(x(x(x(x((\lambda x_1.x(x(xx_1)))x_1)))))) \\
+  & \overset{\beta}{\to} \lambda x.\lambda x_1.x(x(x(x(x(x(x(x(xx_1)))))))).
+\end{align*}
 
 
 \subsection{Question 2}
