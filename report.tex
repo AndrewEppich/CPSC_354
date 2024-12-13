@@ -223,16 +223,30 @@ In my literature review with ChatGPT, I explored interpreted vs. compiled progra
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth, page=1]{CPSC_354_Homework_4.pdf}
+  \includegraphics[width=0.7\textwidth, page=1]{Homework_4_trees.pdf}
   \caption{Homework 4 - Page 1}
   \label{fig:homework4_page1}
 \end{figure}
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth, page=2]{CPSC_354_Homework_4.pdf}
+  \includegraphics[width=0.7\textwidth, page=2]{Homework_4_trees.pdf}
   \caption{Homework 4 - Page 2}
   \label{fig:homework4_page2}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth, page=3]{Homework_4_trees.pdf}
+  \caption{Homework 4 - Page 3}
+  \label{fig:homework4_page3}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth, page=4]{Homework_4_trees.pdf}
+  \caption{Homework 4 - Page 4}
+  \label{fig:homework4_page4}
 \end{figure}
 
 \subsection{Discord Question}
@@ -316,7 +330,7 @@ When thinking about the final Lean problem on the homework, I solved it by break
 \subsection{Lecture Explaination}
 
 \begin{lstlisting}
-In lecture this week we started learning about lambda caclulus. We learned about the syntax of P -> Q. We learned about the rule of how to eliminate so we can prove P -> Q by saying P is evidence of B so h \( A \) :B. We also learned that we can use lambda to create a function of terms that is able to be broken apart. We alsp learned the transitive property that says \( P -> Q \) -> \( Q -> R \) -> P -> R.
+  In class this week we learned about proofs in natural deduction. We talked about the proof of A conjunction B -> C then A -> (B -> C) and also the theorem A -> (B -> C) then (A conjunction B) -> C. we also began talking about lambda calculus. First we talked about lambda abstraction with \x. e which is abstraction because the function does not depend on x anymore. We also learned the abstract syntax of lambda calculus. Also we learned rules of dropping parenthesis in lambda calculus like application associates to the left and appl;ication has a higher precedence than abstraction
 \end{lstlisting}
 
 \subsection{Question 1}
@@ -403,7 +417,7 @@ are lambda calculus proofs a part of the compiler? if so, how do they interact w
 
 \subsection{Question 2}
 
-The function takes two Church numerals m and n and applies m to n. Applying m to n is like multiplying two numbers so it implements multiplication
+The function takes two Church numerals m and n and applies m to n. Applying m to n implements exponentiation where m is the exponent and n is the base
 
 \subsection{Discord Questions}
 
@@ -652,6 +666,44 @@ what other uses do ARSs have besides sorting strings and how are they implemente
 \subsection{Discord Question}
 
 When using recursion in implementing a programming language, is big O notation just as important for optimizing it as it is for implementing data structures in programming for example
+
+\section{Lessons From Group Assignments and Project}\label{lessonsFromGroupAssignmentsAndProject}
+
+
+The first project I worked on was Project 3. For this assignment, I didn’t have a group, so I took on the challenge of completing the entire project independently. This project required me to implement a minimum working example into a calculator, along with various lambda functions. It was an incredible experience to code functions that we had been studying in class and to finally see how these abstract concepts could be applied to programming in a practical way. One of the most significant parts of this project was adapting the evaluate method to ensure that it could correctly parse the given lambda expressions. The process involved parsing the expression into a tree structure, which then allowed the rest of the program to evaluate it effectively. This concept was similar to Homework 4, where we practiced drawing parsing trees for simple equations, except the trees in this project were much more complex. Seeing how the theoretical aspect translated into real programming was both very interesting. Additionally, it was interesting to observe how the linearize method played a crucial role in breaking down functions so they could be evaluated correctly. Understanding how this method worked provided me with deeper insights into how parsing and evaluation fit together in the larger picture of implementing a lambda calculus interpreter. This assignment proved incredibly helpful in solidifying what we had learned during lectures about beta reductions and parsing trees, as it offered a hands-on opportunity to apply those principles. 
+
+
+Moving on to Project 4, Milestone 1, I once again found myself working independently. Having successfully completed Project 3 on my own, I was determined to continue proving to myself that I could tackle these challenges without a group. This milestone required me to add arithmetic operations to the interpreter. Parsing trees were once again critical to my understanding of how these functions were decomposed and processed. By leveraging what I had learned previously, I was able to update the evaluate function to handle these new parsing trees correctly. In addition to updating the program's core functionality, I had to write tests for the test file. This was an interesting experience for me as I had only recently started learning about testing and had never done it in Python before. Writing these tests was not only a great way to reinforce my understanding of the project but also an opportunity to gain practical experience with testing frameworks in Python. The arithmetic operations themselves—such as addition, subtraction, multiplication, and negation—were not overly challenging to incorporate into the program. However, I found it interesting how seemingly simple operations required code that appeared quite complex. To make this work, I added plus, minus, times, and neg to the LambdaCalculusTransformer class, as well as made necessary updates to the evaluate, substitute, and linearize methods. Each of these changes required careful thought and attention to detail to ensure that the operations integrated smoothly into the overall interpreter. 
+
+
+Next, I worked on Assignment 4, Milestone 2, continuing my streak of completing these assignments independently. This milestone involved adding natural language constructs to the interpreter, a task that pushed my understanding of the project even further. Specifically, I implemented if, then, else, let, letrec, and fix. It was interesting to bring these logical structures to life in the interpreter. Implementing the if-then-else logic we discussed in lecture was also interesting. Seeing how the interpreter could process and execute these commands felt like a significant step toward creating a fully functional programming language. In addition to the logical constructs, I also added equality operators such as ==, <=, >=, and !=. This showed me how the theoretical concepts we discussed in class translated into practical coding tasks. Incorporating these operators reminded me of regular programming, where equality checks are essential for writing if statements. The process of adding these operators was an easy extension of the work we had done previously. Since the grammar for if statements was already in place, I could anticipate how this project would evolve. I figured out that these foundational elements would eventually integrate into a system that could support complex logic. By this point, I could clearly see the connection between our lecture material and the code I was writing. Early in the class, I struggled to imagine how we would go from learning lambda calculus to building a full-fledged programming language. However, working on this milestone helped me bridge that gap. I began to understand how the individual components of the interpreter fit together and how they would ultimately contribute to the functionality of the project. 
+
+
+Finally, I tackled Assignment 4, Milestone 3, which proved to be the most challenging milestone yet. This project took an incredible amount of time and effort to complete, particularly the sorting functionality at the end. Getting the sorting to work correctly took me at least three full days of debugging and testing. In this milestone, I introduced several new features, including prog, hd, tl, nil, and cons. These additions required me to update the grammar, as well as the evaluate and linearize functions, to handle the parsing and evaluation of these new expressions. Initially, parsing the increasingly complex trees was very difficult. The complexity of the trees required me to apply the logic we had covered in class. After many many hours, I was able to write code that passed all the tests successfully. I also implemented sequencing, which allowed two different expressions to be executed in the same test. This feature brought a new level of sophistication to the interpreter. Additionally, I implemented lists, which brought me even closer to finishing the programming language. Seeing how lists and other constructs could be integrated into a project I built myself was very satisfying. This milestone represented the culmination of everything I had learned in the class. It was amazing to see the individual components, like parsing trees, equality operators, and logical constructs, come together to form a functioning programming language.
+
+
+
+\section{Conclusion}\label{conclusion}
+
+I enjoyed this course a lot. At first, I was very skeptical of how math would fit into programming languages. After learning all about lambda calculus, recursion, and various evaluation techniques I believe I can step back and have a clear understanding of how a programming language is created and implemented. It was also cool to have other students ask questions on discord and to have the answer explained. I think that helped me put more real world application to the class in general. Taking a step back, I see how important this class is in the scope of software engineering. The content of this course built the groundwork for quite literally the entire software industry. Without lambda calculus, recursion, and other various evaluation techniques there would be no programming languages for people to code on. It is the very foundation of all coding. It kind of blows my mind that I just completed a course that taught me about the very foundation of all software engineering. I found recursion to be very interesting. I never stopped to think about how it actually worked at the most basic level. It was very interesting to take a step out of the world of technology and advanced programming languages and take a look at the bare bones basics that power them. It was also very interesting to learn about lambda calculus and about how functions actually reduce. It was also very interesting to learn about how lambda calculus implements some arithmetic operations with natural numbers. Some of the examples were addition, subtraction, multiplication, and exponentiation. It changed my perspective on lambda calculus because I thought it was just a reduction without any numbers. I also thought parsing was very interesting because I have heard a lot of people using that term without fully understanding what it meant. I feel confident that I know the term completely and its implications after getting to learn the lowest level concepts of parsing. I personally would suggest adding more real world applications into the course as a supplement to the material. I think those real applications helped me to solidify the concept and really see it in a much better way that helped me understand it. Especially, since a lot of people don't like math much and that is just showing a bunch of proofs with no application to real life. I think that would just allow students to understand the significance of the material and apply it better
+
+
+\section{References}\label{references}
+
+Koopmans, R. (2019, October 22). "Lambda calculus for mortals." Medium. https://medium.com/@ReganKoopmans/lambda-calculus-for-mortals-691013808f9c
+
+Hacker News. (2014, June 7). "What is the significance of lambda calculus?". Hacker News. https://news.ycombinator.com/item?id=7506409
+
+GeeksforGeeks. (2021, February 13). Introduction to parsing, ambiguity, and parsers (Set 1). GeeksforGeeks. https://www.geeksforgeeks.org/introduction-of-parsing-ambiguity-and-parsers-set-1/
+
+Ray, J. (n.d.). Parsing theory. Loyola Marymount University. https://cs.lmu.edu/~ray/notes/parsingtheory/
+
+Hofmann, M. (n.d.). The Curry-Howard isomorphism. Carnegie Mellon University. https://web2.qatar.cmu.edu/cs/15317/lectures/04-curryhoward.pdf
+
+Sellin, E. (2020, November 25). What exactly is Turing completeness? Medium. https://evinsellin.medium.com/what-exactly-is-turing-completeness-a08cc36b26e2
+
+Software Engineering Stack Exchange. (n.d.). What are invariants, how can they be used, and have you ever used it in your programming? Software Engineering Stack Exchange. https://softwareengineering.stackexchange.com/questions/32727/what-are-invariants-how-can-they-be-used-and-have-you-ever-used-it-in-your-pro
+
 
 
 \end{document}
