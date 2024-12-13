@@ -1,1 +1,2 @@
-# CPSC-354
+Andrew Eppich
+eppich@chapman.edu
